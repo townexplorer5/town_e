@@ -1,0 +1,7 @@
+page 1: create account or sign in
+page 2 1: sign in
+page 2 2: sign up
+page 3: home page
+page 4: upload image
+page 5: profile
+page 6: rewards 
