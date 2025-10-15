@@ -86,9 +86,17 @@
     
     <div class="content-holder">
         <h1><span style="font-size: 50px;">Log In</span><br> or <br><span style="font-size: 50px;">Sign Up</span></h1>
-      <button>Sign Up</button>
-      <button>Log In</button>
+      <button onclick="SignUp()">Sign Up</button>
+      <button onclick="LogIn()">Log In</button>
     </div>
   </div>
+  <script>
+    function SignUp() {
+        window.location.href = "signup.html"
+    }
+    function LogIn() {
+        window.location.href = "login.html"
+    }
+  </script>
 </body>
 </html>
