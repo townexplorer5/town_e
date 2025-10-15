@@ -5,3 +5,5 @@ page 3: home page
 page 4: upload image
 page 5: profile
 page 6: rewards 
+page 7: friends
+page 8: settings
