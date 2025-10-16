@@ -17,8 +17,10 @@
     * {
       font-family: "Poppins";
     }
-    html {
-      margin: none;
+
+    body, html {
+      margin: 0;
+      padding: 0;
     }
 
     .background-holder {
@@ -28,6 +30,7 @@
       background-color: rgba(7, 63, 57);
       width: 100vw;
       height: 100vh;
+      position: relative;
     }
     
     .content-holder {
@@ -57,21 +60,21 @@
       justify-content: center;
       align-items: center;
     }
-
     .back-holder {
-      background-color: white;
+      background: none;
+      border: none;
+      height: fit-content;
       width: fit-content;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding: 0;
     }
+
     .back {
       background-color: rgba(23, 84, 78);
       border: none;
-      margin: 15px;
       border-radius: 5px;
-      padding: 12.5px;
+      padding: 10px;
       width: 35px;
+      border: 4px solid rgb(5, 44, 40);
     }
     .logo {
       border-radius: 30px;
@@ -119,15 +122,29 @@
       color: white;
       border: none;
     }
+
+    .content-holder
+    {
+      border: 4px solid rgb(5, 44, 40);
+      box-sizing: border-box;
+    }
+
+    .content-holder {
+      border-left: none;
+      border-bottom: none;
+    }
   </style>
 </head>
 <body>
   <div class="background-holder">
-    <div ckass="back-holder">
-      <img class="back" src="back.png">
+    <div class="topbar">
+      <button class="back-holder" onclick="Back()" type="title">
+        <img class="back" src="back.svg" alt="back-arrow">
+      </button>
     </div>
+
     <div class="logo-holder">
-      <img class="logo" src="logo.png">
+      <img class="logo" src="logo.png" alt="town-explorer">
     </div>
 
     <div class="content-holder">
@@ -137,11 +154,19 @@
         <p>USERNAME</p>
         <input type="text" placeholder="Enter username">
         <p>PASSWORD</p>
-        <input type="text" placeholder="Enter password">
+        <input type="password" placeholder="Enter password">
       </div>
-      <button>Log In</button>
+      <button onclick="LogIn()">Log In</button>
     </div>
   </div>
-</body>
+  <script>
+    function Back() {
+      window.location.href = "entrypage.html"
+    }
 
+    function LogIn() {
+        window.location.href = "mediumOLD.html"
+    }
+  </script>
+</body>
 </html>
