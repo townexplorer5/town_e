@@ -17,8 +17,10 @@
     * {
       font-family: "Poppins";
     }
-    html {
-      margin: none;
+
+    body, html {
+      margin: 0;
+      padding: 0;
     }
 
     .background-holder {
@@ -58,11 +60,11 @@
       align-items: center;
     }
     .back-holder {
-      width: fit-content;
+      background: none;
+      border: none;
       height: fit-content;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      width: fit-content;
+      padding: 0;
     }
     .back {
       background-color: rgba(23, 84, 78);
@@ -70,6 +72,7 @@
       border-radius: 5px;
       padding: 10px;
       width: 35px;
+      border: 4px solid rgb(5, 44, 40);
     }
     .logo {
       border-radius: 30px;
@@ -119,15 +122,28 @@
       color: white;
       border: none;
     }
+
+    .content-holder
+    {
+      border: 4px solid rgb(5, 44, 40);
+      box-sizing: border-box;
+    }
+
+    .content-holder {
+      border-right: none;
+      border-bottom: none;
+    }
   </style>
 </head>
 <body>
   <div class="background-holder">
-    <button class="back-holder" onclick="Back()">
-      <img class="back" src="back.png">
-    </button>
+    <div class="topbar">
+      <button class="back-holder" onclick="Back()" type="title">
+        <img class="back" src="back.svg" alt="back-arrow">
+      </button>
+    </div>
     <div class="logo-holder">
-      <img class="logo" src="logo.png">
+      <img class="logo" src="logo.png" alt="town-explorer">
     </div>
 
     <div class="content-holder">
@@ -137,14 +153,18 @@
         <p>USERNAME</p>
         <input type="text" placeholder="Enter username">
         <p>PASSWORD</p>
-        <input type="text" placeholder="Enter password">
+        <input type="password" placeholder="Enter password">
       </div>
-      <button>Sign up</button>
+      <button onclick="SignUp()">Sign up</button>
     </div>
   </div>
   <script>
     function Back() {
       window.location.href = "entrypage.html"
+    }
+
+    function SignUp() {
+      window.location.href = "mediumNEW.html"
     }
   </script>
 </body>
