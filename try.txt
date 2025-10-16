@@ -7,3 +7,6 @@ page 5: profile
 page 6: rewards 
 page 7: friends
 page 8: settings
+
+darker green: rgba(7, 63, 57);
+lighter green rgba(69, 106, 102);
