@@ -16,8 +16,10 @@
     * {
       font-family: "Poppins";
     }
-    html {
-      margin: none;
+
+    body, html {
+      margin: 0;
+      padding: 0;
     }
 
     .background-holder {
@@ -69,23 +71,38 @@
       margin: 10px;
       padding-left: 75px;
       padding-right: 75px;
-      font-size: 22.5px;
+      font-size: 20px;
       font-weight: bold;
+      width: 70%;
       background-color: rgba(7, 63, 57);
       color: white;
       border: none;
+    }
+    .spacer {
+      height: 5vh;
+    }
+
+    .content-holder
+    {
+      border: 4px solid rgb(5, 44, 40);
+      box-sizing: border-box;
+    }
+
+    .content-holder {
+      border-left: none;
+      border-bottom: none;
     }
     </style>
 </head>
 <body>
   <div class="background-holder">
     <div class="logo-holder">
-      <img class="logo" src="logo.png">
+      <img class="logo" src="logo.png" alt="town-explorer">
     </div>
-
-    
     <div class="content-holder">
         <h1><span style="font-size: 50px;">Log In</span><br> or <br><span style="font-size: 50px;">Sign Up</span></h1>
+
+      <div class="spacer"></div>
       <button onclick="SignUp()">Sign Up</button>
       <button onclick="LogIn()">Log In</button>
     </div>
