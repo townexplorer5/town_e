@@ -196,6 +196,26 @@
       margin: 0;
       padding: 0;
     }
+    .post-grid {
+      width: 100vw;
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+    }
+    .post {
+      padding: 10px;
+      display: flex;
+      
+    }
+    .post p {
+
+    }
+    .thumbnail {
+      height: 77.78%;
+      width: 100%;
+      border-radius: 20px
+    }
     </style>
 </head>
 <body>
@@ -229,10 +249,15 @@
           </RIGHT>
         </div>
     </div>
-
+    
     <div class="content-holder2">
-      <button>Get Started</button>
-      <button>Profile</button>
+      <h1>Posts</h1>  
+      <div class="post-grid">
+        <div class="post">
+          <img class="thumbnail" src="logo.png">
+          <p class="title">Image Title</p>
+        </div>
+      </div>
     </div>
   </div>
 </body>
