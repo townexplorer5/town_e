@@ -26,9 +26,9 @@ VERY IMP:
 
 PRESENTATION REQUIREMENTS:
 
-Laptop/mini server/mini pc + monitor (server)
-2+ mobile phones/devices (clients)
-personal mobile phone (hotspot/personal wifi, network)
+Laptop/mini server/mini pc + monitor (server) (vansh, vardhaan, jastej)
+2+ mobile phones/devices (clients) (vardhaan (iball, raspberry), naman) 
+personal mobile phone (hotspot/personal wifi, network) (vardhaan, naman, priyansh)
 or 
 local wifi (school wifi, network)
 
