@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyTown Explorer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+    <style>
+        h1 {
+            color: white;
+        }
+
+        * {
+            font-family: "Poppins";
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+        }
+
+        .background-holder {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: rgba(7, 63, 57);
+            width: 100vw;
+            height: 100vh;
+        }
+        .content-holder2 {
+            background-color: rgba(23, 84, 78);
+            width: 85vw;
+            border-radius: 7.5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-size: medium;
+        }
+        .content-holder {
+            background-color: rgba(23, 84, 78);
+            width: 85vw;
+            border-radius: 7.5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .content-holder {
+            height: 75vh;
+            margin: 75px;
+            z-index: 2;
+        }
+
+        .content-holder h1 {
+            font-size: 50px;
+            margin: none;
+        }
+
+        .content-holder2 {
+            border-radius: 0%;
+            width: 100vw;
+            height: 100%;
+            margin: 0;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content-holder p {
+            color: white;
+            margin: 0;
+        }
+
+        .content-holder h1 {
+            margin-bottom: 0px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .content-holder p {
+            color: white;
+            font-size: larger;
+        }
+
+        .logo-holder2 {
+            background-color:rgba(23, 84, 78);
+            width: 100vw;
+            height: fit-content;
+            align-items: center;
+            display: flex;
+        }
+        .logo-holder2 h1{
+            font-size: 29px;
+            color: rgba(254, 250, 240);
+        }
+        .logo-holder {
+            position: relative;
+            display: flex;
+            height: fit-content;
+            width: 100vw;
+            z-index: 1002;
+            background-color:rgba(7, 63, 57);
+        }
+        .logo {
+            border-radius: 15px;
+            padding: 0;
+            height: 90px;
+            width: 90px;
+        }
+        button {
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px;
+            padding-left: 75px;
+            padding-right: 75px;
+            font-size: 25px;
+            font-weight: bold;
+            width: 65%;
+            background-color: rgba(7, 63, 57);
+            color: white;
+            border: none;
+        }
+
+        .content-holder,
+        .content-holder2,
+        .logo-holder2 {
+            border: 4px solid rgb(5, 44, 40);
+            box-sizing: border-box;
+        }
+
+        .logo-holder2 {
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            margin-bottom: 0;
+        }
+        .logo-background {
+            display: inline-flex;       /* shrink to fit content */
+            align-items: center;        /* vertical alignment */
+            justify-content: center;    /* horizontal alignment */
+            padding: 0;
+            margin: 20px;
+            border: none;
+            width: fit-content;
+        }
+
+        .content-holder2  {
+            border-bottom: none;
+            border-right: none;
+            border-left: none;
+        }
+        
+        .take-photo {
+            width: 280px;
+            height: 65px;
+            border-radius: 10px;
+            background-color: rgba(7, 63, 57);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .take-photo-label {
+            color: white;
+        }
+
+        .transparent {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0,0,0,0.4);
+            z-index: 1000; /* below logo and sidebar */       
+
+        }
+        .sidebar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 1002;
+            background-color: rgba(7, 63, 57);
+            width: fit-content;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-right: 4px solid rgb(5, 44, 40);
+        }
+        .sidebar p {
+            color: white;
+            margin: 5px;
+            font-size: larger;
+        }
+        .profile {
+            width: 175px;
+            height: 175px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+        .profile-holder {
+            background-color: rgba(23, 84, 78);
+            width: fit-content;
+            height: fit-content;
+            margin-top: 50%; 
+            padding: 12.5px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 4px solid rgb(5, 44, 40);
+        }
+        .button-holder {
+            background-color: rgba(23, 84, 78);
+            border-top: 4px solid rgb(5, 44, 40);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0;
+            width: 100%;
+        }
+        .button-holder button {
+            background-color:rgba(7, 63, 57);
+            font-size: 25px;
+            width: 85%;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .button-holder button img {
+            width: 35px;
+        }
+        .divider {
+            width: 100%;
+            border: 1px solid rgb(5, 44, 40);
+        }
+        #logout-button {
+            background-color:rgb(87, 14, 14);
+            width: fit-content;
+        }
+        
+        /* Fixed styles for buttons in content-holder2 */
+        .content-holder2 button {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 15px;
+            padding: 15px 20px;
+        }
+        
+        .content-holder2 button img {
+            width: 35px;
+            height: 35px;
+        }
+        
+        .btn {
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="transparent" style="display: block;">
+        <div class="sidebar">
+            <div class="profile-holder">
+                <img class="profile" src="assets/images/logo2.png" alt="town-explorer">
+                <p class="username-holder">Hello there, USERNAME!</p>
+            </div>
+            <div class="spacer" style="height: max;"></div>
+            <div class="button-holder">
+                <button class="sidebar-button">
+                    <img src="assets/medal.png">
+                    Rewards..
+                </button>
+                <button class="sidebar-button">
+                    <img src="assets/profile.png">
+                    Profile..
+                </button>
+                <button class="sidebar-button">
+                    <img src="assets/friends.png">
+                    Friends..
+                </button>
+                <hr class="divider">
+                <button class="sidebar-button" id="logout-button">
+                    <img src="assets/logout.png">
+                    Logout..
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="permanent-sidebar"></div>
+
+    <div class="background-holder">
+        <div class="logo-holder">
+            <div class="logo-holder2">
+                <button class="logo-background" onclick="toggle_background()">
+                    <img class="logo" src="assets/images/logo2.png" alt="town-explorer">
+                </button>
+                <h1>My Town Explorer</h1>
+            </div>
+        </div>
+
+        <div class="content-holder" id="map">
+            <h1><i>Map</i></h1>
+        </div>
+
+        <div class="content-holder2">
+            <button>
+                <img src="assets/browse.png">
+                Browse
+            </button>
+            <button class="btn">
+                <img src="assets/ai.png">
+                AI Assistant
+            </button>
+            <button class="take-photo">
+              <img src="assets/photo.png">
+                <p class="take-photo-label">Take Photo</p>
+            </button>
+        </div>
+    </div>
+     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+    <script>
+        function toggle_background() {
+            const background = document.querySelector(".transparent");
+            const currentDisplay = background.style.display;
+
+            if (currentDisplay === "block") {
+                background.style.display = "none";
+            } else {
+                background.style.display = "block";
+            }
+        }
+
+        const logoHolder = document.querySelector(".logo-holder2");
+        const sidebar = document.querySelector(".sidebar");
+        const background = document.querySelector(".transparent");
+
+        function adjustSidebar() {
+            const logoHeight = logoHolder.offsetHeight;
+            sidebar.style.marginTop = logoHeight;
+            sidebar.style.height = `calc(100vh - ${logoHeight}px)`
+        }
+        
+        adjustSidebar();
+
+        var map = L.map('map').setView([51.505, -0.09], 13);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+    </script>
+</body>
+</html>

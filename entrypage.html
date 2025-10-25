@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyTown Explorer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-dark: rgba(7, 63, 57);
+            --primary-medium: rgba(23, 84, 78);
+            --primary-light: rgba(5, 44, 40);
+            --accent: #ffcc00;
+        }
+        
+        * {
+            font-family: "Poppins", sans-serif;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .background-holder {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            background-color: var(--primary-dark);
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Map-like background pattern */
+        .background-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.05) 2px, transparent 0),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 2px, transparent 0);
+            background-size: 50px 50px;
+            animation: patternMove 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes patternMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
+        .content-holder {
+            background-color: var(--primary-medium);
+            width: 100vw;
+            height: 65vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+            z-index: 2;
+            border-top: 4px solid var(--primary-light);
+            transform: translateY(100%);
+            animation: slideUp 1s ease-out 0.5s forwards;
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .content-holder p {
+            color: white;
+            margin: 0;
+        }
+
+        .content-holder h1 {
+            margin-bottom: 0px;
+            margin-top: 15px;
+            text-align: center;
+            color: white;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .logo-holder {
+            height: 35vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.8s forwards;
+        }
+
+        .logo {
+            border-radius: 30px;
+            height: 250px;
+            width: 250px;
+            box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.4);
+            animation: pulse 2s infinite 1.5s;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(255, 255, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0px rgba(255, 255, 255, 0);
+            }
+        }
+
+        button {
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px;
+            padding-left: 75px;
+            padding-right: 75px;
+            font-size: 20px;
+            font-weight: bold;
+            width: 70%;
+            background-color: var(--primary-dark);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out 2s forwards;
+        }
+
+        button:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        button:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+
+        .spacer {
+            height: 5vh;
+        }
+
+        .weather-preview {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 20px;
+            color: white;
+            font-size: 14px;
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            animation: fadeIn 1s ease-out 2.5s forwards;
+        }
+
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 14px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 2.5s forwards;
+        }
+
+        .language-selector select {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 10px;
+            padding: 5px 10px;
+            color: white;
+            backdrop-filter: blur(5px);
+        }
+
+        .explore-text {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 3s forwards;
+        }
+
+        .team-credit {
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 10px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 3.5s forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-holder">
+        <div class="background-pattern"></div>
+        
+        <div class="language-selector">
+            <select id="languageSelect">
+                <option value="en">English</option>
+                <option value="hi">हिन्दी</option>
+                <option value="ta">தமிழ்</option>
+                <option value="te">తెలుగు</option>
+                <option value="bn">বাংলা</option>
+            </select>
+        </div>
+        
+        <div class="weather-preview">
+            <span id="weatherIcon">☀️</span>
+            <span id="weatherTemp">32°C</span>
+        </div>
+        
+        <div class="spacer"></div>
+        <div class="logo-holder">
+            <img class="logo" src="assets/images/logo.png" alt="MyTown Explorer">
+        </div>
+        <div class="content-holder">
+            <h1><span style="font-size: 60px;">Log In</span><br> or <br><span style="font-size: 60px;">Sign Up</span></h1>
+
+            <div class="spacer"></div>
+            <button onclick="SignUp()">Sign Up</button>
+            <button onclick="LogIn()">Log In</button>
+            
+            <div class="explore-text">
+                Discover India's hidden gems • Share your experiences • Earn rewards
+            </div>
+        </div>
+        
+        <div class="team-credit">by aiteam5</div>
+    </div>
+    
+    <script>
+        function SignUp() {
+            // Add ripple effect before navigation
+            event.target.classList.add('clicked');
+            setTimeout(() => {
+                window.location.href = "signup.html";
+            }, 300);
+        }
+        
+        function LogIn() {
+            // Add ripple effect before navigation
+            event.target.classList.add('clicked');
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 300);
+        }
+        
+        // Update weather preview (simulated for prototype)
+        function updateWeatherPreview() {
+            const weatherIcons = ['☀️', '⛅', '🌧️', '🌤️', '🌦️'];
+            const temps = ['28°C', '30°C', '32°C', '29°C', '31°C'];
+            
+            const randomIcon = weatherIcons[Math.floor(Math.random() * weatherIcons.length)];
+            const randomTemp = temps[Math.floor(Math.random() * temps.length)];
+            
+            document.getElementById('weatherIcon').textContent = randomIcon;
+            document.getElementById('weatherTemp').textContent = randomTemp;
+        }
+        
+        // Initialize weather preview
+        updateWeatherPreview();
+        
+        // Update weather every 10 seconds (for demo purposes)
+        setInterval(updateWeatherPreview, 10000);
+        
+        // Language selector functionality
+        document.getElementById('languageSelect').addEventListener('change', function() {
+            // In a real app, this would change the language of the interface
+            alert('Language changed to: ' + this.options[this.selectedIndex].text);
+        });
+    </script>
+</body>
+</html>
